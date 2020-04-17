@@ -1,0 +1,26 @@
+<div>
+    <h2 class="text-center">Sign Up</h2>
+    <form #f="ngForm" (ngSubmit)="signup(f)">
+        <input ngModel name="name" #name="ngModel" type="text" class="form-control" placeholder="Your Name" required>
+        <div class="alert alert-danger" *ngIf="name.invalid && name.touched"> Name is Required</div>
+
+        <input ngModel name="email" #email="ngModel" type="email" class="form-control" placeholder="Your Email" required email>
+        <div class="alert alert-danger" *ngIf="email.touched && email.errors"> Email is Required </div>
+        <div class="alert alert-danger" *ngIf="email.touched && email.errors"> Email input dosent format</div>
+
+        <input ngModel name="password" #password="ngModel" type="password" class="form-control" placeholder="Password" required minlength="6">
+        <div class="alert alert-danger" *ngIf="password.touched && password.errors"> password is Required </div>
+        <div class="alert alert-danger" *ngIf="password.touched && password.errors"> password input 6Ch </div>
+
+        <input ngModel name="passwordconfrm" #passwordconfrm="ngModel" type="password" class="form-control" placeholder=" Confirm Password" required>
+        <div class="alert alert-danger" *ngIf="passwordconfrm.invalid && passwordconfrm.touched"> Confirm Password is Required</div>
+        <div class="alert alert-danger" *ngIf="passwordconfrm.value !== password.value && passwordconfrm.touched"> Password nt equl</div>
+
+        <input ngModel name="address" #address="ngModel" type="text" class="form-control" placeholder="Address" required>
+        <div class="alert alert-danger" *ngIf="address.invalid && address.touched"> Address is Required</div>
+
+        <button class="btn btn-primary" [disabled]="f.invalid || passwordconfrm.value !== password.value" (click)="signup(f)">Create Account</button>
+    </form>
+    <br>
+    <div class="alert alert-danger" *ngIf="errormass">{{errormass}}</div>
+</div>
